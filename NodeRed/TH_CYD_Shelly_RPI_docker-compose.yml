@@ -1,0 +1,160 @@
+version: '3.6'
+services:
+  nodered:
+    container_name: nodered
+    image: nodered/node-red:latest 
+    restart: unless-stopped
+    user: "0"
+    privileged: true
+    environment:
+    - TZ=Etc/UTC
+    ports:
+    - "1880:1880"
+    volumes:
+    - ./volumes/nodered/data:/data
+    - /var/run/docker.sock:/var/run/docker.sock
+    - /var/run/dbus/system_bus_socket:/var/run/dbus/system_bus_socket
+    devices:
+    - "/dev/ttyAMA0:/dev/ttyAMA0"
+    - "/dev/vcio:/dev/vcio"
+    - "/dev/gpiomem:/dev/gpiomem"
+    networks:
+    - iotstack_nw
+    
+  portainer-ce:
+    container_name: portainer-ce
+    image: portainer/portainer-ce
+    restart: unless-stopped
+    ports:
+    - "8000:8000"
+    - "9000:9000"
+    volumes:
+    - /var/run/docker.sock:/var/run/docker.sock
+    - ./volumes/portainer-ce/data:/data
+    
+  grafana:
+    container_name: grafana
+    image: grafana/grafana
+    restart: unless-stopped
+    user: "0"
+    ports:
+    - "3000:3000"
+    environment:
+    - GF_PATHS_DATA=/var/lib/grafana
+    - GF_PATHS_LOGS=/var/log/grafana
+    volumes:
+    - ./volumes/grafana/data:/var/lib/grafana
+    - ./volumes/grafana/log:/var/log/grafana
+    networks:
+    - iotstack_nw
+
+  mosquitto:
+    container_name: mosquitto
+    image: eclipse-mosquitto:latest 
+    restart: unless-stopped
+    environment:
+    - TZ=Etc/UTC
+    ports:
+    - "1883:1883"
+    volumes:
+    - ./volumes/mosquitto/config:/mosquitto/config
+    - ./volumes/mosquitto/data:/mosquitto/data
+    - ./volumes/mosquitto/log:/mosquitto/log
+    - ./volumes/mosquitto/pwfile:/mosquitto/pwfile
+    networks:
+    - iotstack_nw
+
+  fuxamosq:
+    container_name: fuxamosq
+    image: eclipse-mosquitto:latest 
+    restart: unless-stopped
+    environment:
+    - TZ=Etc/UTC
+    ports:
+    - "1888:1883"
+    volumes:
+    - ./volumes/fuxamosq/config:/mosquitto/config
+    - ./volumes/fuxamosq/data:/mosquitto/data
+    - ./volumes/fuxamosq/log:/mosquitto/log
+    - ./volumes/fuxamosq/pwfile:/mosquitto/pwfile
+    networks:
+    - iotstack_nw
+
+  influxdb:
+    container_name: influxdb
+    image: "influxdb:1.8"
+    restart: unless-stopped
+    ports:
+    - "8086:8086"
+    environment:
+    - TZ=Etc/UTC
+    - INFLUXDB_HTTP_FLUX_ENABLED=false
+    - INFLUXDB_REPORTING_DISABLED=false
+    - INFLUXDB_HTTP_AUTH_ENABLED=false
+    - INFLUXDB_MONITOR_STORE_ENABLED=false
+    - INFLUXDB_DATA_QUERY_LOG_ENABLED=false
+    - INFLUXDB_HTTP_LOG__ENABLED=false
+  # - INFLUX_USERNAME=dba
+  # - INFLUX_PASSWORD=supremo
+  # - INFLUXDB_UDP_ENABLED=false
+  # - INFLUXDB_UDP_BIND_ADDRESS=0.0.0.0:8086
+  # - INFLUXDB_UDP_DATABASE=udp
+    volumes:
+    - ./volumes/influxdb/data:/var/lib/influxdb
+    - ./backups/influxdb/db:/var/lib/influxdb/backup
+    networks:
+    - iotstack_nw
+
+  fuxa:
+    container_name: fuxa
+  #  image: ghcr.io/frangoteam/fuxa    
+    image: frangoteam/fuxa
+    restart: unless-stopped
+    ports:
+    - "1881:1881"
+    volumes:
+      - ./volumes/fuxa/appdata:/usr/src/app/FUXA/server/_appdata
+      - ./volumes/fuxa/db:/usr/src/app/FUXA/server/_db
+      - ./volumes/fuxa/logs:/usr/src/app/FUXA/server/_logs
+      - ./volumes/fuxa/images:/usr/src/app/FUXA/server/_images
+    networks:
+    - iotstack_nw
+
+  lighttpd:
+    container_name: lighttpd
+    image: sebp/lighttpd
+    restart: unless-stopped
+    ports:
+    - "80:80"
+    volumes:
+    - ./volumes/lighttpd/www:/var/www/localhost/htdocs
+    - ./volumes/lighttpd/config:/etc/lighttpd
+    tty: true
+
+networks:
+  iotstack_nw: # Exposed by your host.
+    # external: true
+    name: IOTstack_Net
+    driver: bridge
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.77.60.0/24
+        # - gateway: 10.77.60.1
+
+  iotstack_nw_internal: # For interservice communication. No access to outside
+    name: IOTstack_Net_Internal
+    driver: bridge
+    internal: true
+    ipam:
+      driver: default
+      config:
+      - subnet: 10.77.76.0/24
+        # - gateway: 10.77.76.1
+        
+# default:
+#   external: true
+#   name: iotstack_nw
+
+# hosts_nw:
+#   driver: hosts

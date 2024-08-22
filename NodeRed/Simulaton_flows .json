@@ -1,0 +1,620 @@
+[
+    {
+        "id": "c50fc77c9612fbcd",
+        "type": "tab",
+        "label": "Simulate IOT",
+        "disabled": false,
+        "info": "",
+        "env": []
+    },
+    {
+        "id": "a7231a4a03dc5533",
+        "type": "ui_base",
+        "theme": {
+            "name": "theme-light",
+            "lightTheme": {
+                "default": "#0094CE",
+                "baseColor": "#0094CE",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": true,
+                "reset": false
+            },
+            "darkTheme": {
+                "default": "#097479",
+                "baseColor": "#097479",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif",
+                "edited": false
+            },
+            "customTheme": {
+                "name": "Untitled Theme 1",
+                "default": "#4B7930",
+                "baseColor": "#4B7930",
+                "baseFont": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+            },
+            "themeState": {
+                "base-color": {
+                    "default": "#0094CE",
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-titlebar-backgroundColor": {
+                    "value": "#0094CE",
+                    "edited": false
+                },
+                "page-backgroundColor": {
+                    "value": "#fafafa",
+                    "edited": false
+                },
+                "page-sidebar-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-textColor": {
+                    "value": "#1bbfff",
+                    "edited": false
+                },
+                "group-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "group-backgroundColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "widget-textColor": {
+                    "value": "#111111",
+                    "edited": false
+                },
+                "widget-backgroundColor": {
+                    "value": "#0094ce",
+                    "edited": false
+                },
+                "widget-borderColor": {
+                    "value": "#ffffff",
+                    "edited": false
+                },
+                "base-font": {
+                    "value": "-apple-system,BlinkMacSystemFont,Segoe UI,Roboto,Oxygen-Sans,Ubuntu,Cantarell,Helvetica Neue,sans-serif"
+                }
+            },
+            "angularTheme": {
+                "primary": "indigo",
+                "accents": "blue",
+                "warn": "red",
+                "background": "grey",
+                "palette": "light"
+            }
+        },
+        "site": {
+            "name": "Node-RED MeNoteBook",
+            "hideToolbar": "false",
+            "allowSwipe": "false",
+            "lockMenu": "true",
+            "allowTempTheme": "none",
+            "dateFormat": "DD.MM.YYYY",
+            "sizes": {
+                "sx": 48,
+                "sy": 48,
+                "gx": 6,
+                "gy": 6,
+                "cx": 6,
+                "cy": 6,
+                "px": 0,
+                "py": 0
+            }
+        }
+    },
+    {
+        "id": "cfba998de436b008",
+        "type": "ui_tab",
+        "name": "MeIOT",
+        "icon": "dashboard",
+        "order": 2,
+        "disabled": false,
+        "hidden": false
+    },
+    {
+        "id": "ce49472934d4dc25",
+        "type": "mqtt-broker",
+        "name": "Mosquitto",
+        "broker": "192.168.167.30",
+        "port": "1883",
+        "clientid": "",
+        "autoConnect": true,
+        "usetls": false,
+        "protocolVersion": "4",
+        "keepalive": "60",
+        "cleansession": true,
+        "autoUnsubscribe": true,
+        "birthTopic": "",
+        "birthQos": "0",
+        "birthRetain": "false",
+        "birthPayload": "",
+        "birthMsg": {},
+        "closeTopic": "",
+        "closeQos": "0",
+        "closeRetain": "false",
+        "closePayload": "",
+        "closeMsg": {},
+        "willTopic": "",
+        "willQos": "0",
+        "willRetain": "false",
+        "willPayload": "",
+        "willMsg": {},
+        "userProps": "",
+        "sessionExpiry": ""
+    },
+    {
+        "id": "c84ad742857b146c",
+        "type": "ui_group",
+        "name": "Simulator",
+        "tab": "cfba998de436b008",
+        "order": 1,
+        "disp": true,
+        "width": "16",
+        "collapse": false,
+        "className": ""
+    },
+    {
+        "id": "14738c4581f56682",
+        "type": "file in",
+        "z": "c50fc77c9612fbcd",
+        "name": "",
+        "filename": ".node-red/DATA/Msg-001.csv",
+        "filenameType": "str",
+        "format": "utf8",
+        "chunk": false,
+        "sendError": false,
+        "encoding": "none",
+        "allProps": false,
+        "x": 340,
+        "y": 140,
+        "wires": [
+            [
+                "0111f22787f95e1e"
+            ]
+        ]
+    },
+    {
+        "id": "525d1e10a314673e",
+        "type": "inject",
+        "z": "c50fc77c9612fbcd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 140,
+        "y": 140,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "559af5f80de7bdb5",
+        "type": "mqtt in",
+        "z": "c50fc77c9612fbcd",
+        "name": "Mosqitto-In",
+        "topic": "",
+        "qos": "2",
+        "datatype": "auto-detect",
+        "broker": "ce49472934d4dc25",
+        "nl": false,
+        "rap": true,
+        "rh": 0,
+        "inputs": 1,
+        "x": 160,
+        "y": 40,
+        "wires": [
+            []
+        ]
+    },
+    {
+        "id": "33f62afdd1f8e7e5",
+        "type": "mqtt out",
+        "z": "c50fc77c9612fbcd",
+        "name": "Mosqitto-Out",
+        "topic": "",
+        "qos": "0",
+        "retain": "false",
+        "respTopic": "",
+        "contentType": "",
+        "userProps": "",
+        "correl": "",
+        "expiry": "",
+        "broker": "ce49472934d4dc25",
+        "x": 1070,
+        "y": 280,
+        "wires": []
+    },
+    {
+        "id": "0111f22787f95e1e",
+        "type": "split",
+        "z": "c50fc77c9612fbcd",
+        "name": "",
+        "splt": "\\n",
+        "spltType": "str",
+        "arraySplt": 1,
+        "arraySpltType": "len",
+        "stream": false,
+        "addname": "",
+        "x": 530,
+        "y": 140,
+        "wires": [
+            [
+                "9e99748ec78b469f"
+            ]
+        ]
+    },
+    {
+        "id": "9e99748ec78b469f",
+        "type": "csv",
+        "z": "c50fc77c9612fbcd",
+        "name": "",
+        "sep": ";",
+        "hdrin": true,
+        "hdrout": "none",
+        "multi": "one",
+        "ret": "\\n",
+        "temp": "",
+        "skip": "0",
+        "strings": true,
+        "include_empty_strings": "",
+        "include_null_values": "",
+        "x": 650,
+        "y": 140,
+        "wires": [
+            [
+                "5d8295038bbc35ed"
+            ]
+        ]
+    },
+    {
+        "id": "cc478f9464e083e4",
+        "type": "debug",
+        "z": "c50fc77c9612fbcd",
+        "d": true,
+        "name": "D2",
+        "active": true,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "true",
+        "targetType": "full",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 1130,
+        "y": 140,
+        "wires": []
+    },
+    {
+        "id": "779c263a8e05070a",
+        "type": "function",
+        "z": "c50fc77c9612fbcd",
+        "name": "Seperate Pay/Top",
+        "func": "var load = msg.payload;\nvar topic = load.topic;\nvar payload = load.payload;\n\nmsg.topic = topic;\nmsg.payload = payload;\nreturn msg;",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 970,
+        "y": 140,
+        "wires": [
+            [
+                "cc478f9464e083e4"
+            ]
+        ]
+    },
+    {
+        "id": "5d8295038bbc35ed",
+        "type": "delay",
+        "z": "c50fc77c9612fbcd",
+        "name": "Delay",
+        "pauseType": "rate",
+        "timeout": "5",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "3",
+        "randomLast": "6",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 790,
+        "y": 140,
+        "wires": [
+            [
+                "779c263a8e05070a"
+            ]
+        ]
+    },
+    {
+        "id": "88c7b0277307e68a",
+        "type": "debug",
+        "z": "c50fc77c9612fbcd",
+        "d": true,
+        "name": "debug 1",
+        "active": false,
+        "tosidebar": true,
+        "console": false,
+        "tostatus": false,
+        "complete": "payload",
+        "targetType": "msg",
+        "statusVal": "",
+        "statusType": "auto",
+        "x": 940,
+        "y": 360,
+        "wires": []
+    },
+    {
+        "id": "64bc64f43f92e0e0",
+        "type": "inject",
+        "z": "c50fc77c9612fbcd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "10",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 300,
+        "wires": [
+            [
+                "b38133b8a1cdf961",
+                "62e6a2fc29067419"
+            ]
+        ]
+    },
+    {
+        "id": "b38133b8a1cdf961",
+        "type": "random",
+        "z": "c50fc77c9612fbcd",
+        "name": "50-53",
+        "low": "50",
+        "high": "53",
+        "inte": "true",
+        "property": "payload",
+        "x": 310,
+        "y": 240,
+        "wires": [
+            [
+                "4f45254fc0c24724"
+            ]
+        ]
+    },
+    {
+        "id": "4f45254fc0c24724",
+        "type": "function",
+        "z": "c50fc77c9612fbcd",
+        "name": "Sauna",
+        "func": "function getRandomInt(min, max) {\n    return Math.floor(Math.random() * (max - min) + min);\n}\n/*\nlet www = flow.get(\"WATCH\");\nwww = www * -1 ;\nflow.set(\"WATCH\", www);\n*/\n\nlet payload = msg.payload;\nlet topic;\nlet Node = \"esp/M5-TH-0\" + payload \nlet TopH0 = Node + \"/ext_humidity/0\";\nlet TopT0 = Node + \"/ext_temperature/0\";\nlet TopT1 = Node + \"/ext_temperature/1\";\nlet TopT2 = Node + \"/ext_temperature/2\";\nlet TopT3 = Node + \"/ext_temperature/3\";\n\nlet H0 = getRandomInt(3, 20);\nlet T0 = getRandomInt(20, 70);\nlet T1 = getRandomInt(20, 300);\nlet T2 = getRandomInt(20, 85);\nlet T3 = getRandomInt(20, 95);\n\nmsg = { payload: H0, topic: TopH0};\nlet msg1 = { payload: T0, topic: TopT0 };\nlet msg2 = { payload: T1, topic: TopT1 };\nlet msg3 = { payload: T2, topic: TopT2 }; \nlet msg4 = { payload: T3, topic: TopT3 };\n\nlet TopW = Node + \"/watchdog\";\nlet W = getRandomInt(0, 2);\nlet msg9 = { payload: W, topic: TopW };\n\n\nnode.send(msg); \nnode.send(msg1);\nnode.send(msg2);\nnode.send(msg3);\nnode.send(msg4);\nnode.send(msg9);",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 630,
+        "y": 240,
+        "wires": [
+            [
+                "88c7b0277307e68a",
+                "33f62afdd1f8e7e5",
+                "74fb07d4a7445eb6",
+                "faba4eb3679e2236"
+            ]
+        ]
+    },
+    {
+        "id": "b0af3002b27c00b2",
+        "type": "random",
+        "z": "c50fc77c9612fbcd",
+        "name": "54-59",
+        "low": "54",
+        "high": "59",
+        "inte": "true",
+        "property": "payload",
+        "x": 490,
+        "y": 300,
+        "wires": [
+            [
+                "5dc70e2960827be4"
+            ]
+        ]
+    },
+    {
+        "id": "5dc70e2960827be4",
+        "type": "function",
+        "z": "c50fc77c9612fbcd",
+        "name": "Räume",
+        "func": "function getRandomInt(min, max) {\n    return Math.floor(Math.random() * (max - min) + min);\n}\n\nlet payload = msg.payload;\nlet topic;\nlet Node = \"esp/M5-TH-0\" + payload \nlet TopH0 = Node + \"/ext_humidity/0\";\nlet TopT0 = Node + \"/ext_temperature/0\";\nlet TopT1 = Node + \"/ext_temperature/1\";\nlet TopT2 = Node + \"/ext_temperature/2\";\nlet TopT3 = Node + \"/ext_temperature/3\";\nlet TopT4 = Node + \"/ext_temperature/4\";\n\nlet H0 = getRandomInt(20, 80);\nlet T0 = getRandomInt(5, 35);\nlet T1 = getRandomInt(20, 300);\nlet T2 = getRandomInt(5, 35);\nlet T3 = getRandomInt(5, 35);\nlet T4 = getRandomInt(5, 35);\n\nmsg = { payload: H0, topic: TopH0};\nlet msg1 = { payload: T0, topic: TopT0 };\nlet msg2 = { payload: T1, topic: TopT1 };\nlet msg3 = { payload: T2, topic: TopT2 }; \nlet msg4 = { payload: T3, topic: TopT3 };\nlet msg5 = { payload: T4, topic: TopT4 };\n\nlet TopW = Node + \"/watchdog\";\nlet W = getRandomInt(0, 2);\nlet msg9 = { payload: W, topic: TopW };\n\nnode.send(msg);\nnode.send(msg1);\nnode.send(msg2);\nnode.send(msg3);\nnode.send(msg4);\nnode.send(msg5);\nnode.send(msg9);\n\n\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 300,
+        "wires": [
+            [
+                "88c7b0277307e68a",
+                "33f62afdd1f8e7e5",
+                "74fb07d4a7445eb6",
+                "faba4eb3679e2236"
+            ]
+        ]
+    },
+    {
+        "id": "62e6a2fc29067419",
+        "type": "delay",
+        "z": "c50fc77c9612fbcd",
+        "name": "",
+        "pauseType": "delay",
+        "timeout": "1",
+        "timeoutUnits": "seconds",
+        "rate": "1",
+        "nbRateUnits": "1",
+        "rateUnits": "second",
+        "randomFirst": "1",
+        "randomLast": "5",
+        "randomUnits": "seconds",
+        "drop": false,
+        "allowrate": false,
+        "outputs": 1,
+        "x": 340,
+        "y": 300,
+        "wires": [
+            [
+                "b0af3002b27c00b2"
+            ]
+        ]
+    },
+    {
+        "id": "74fb07d4a7445eb6",
+        "type": "ui_text",
+        "z": "c50fc77c9612fbcd",
+        "group": "c84ad742857b146c",
+        "order": 1,
+        "width": 14,
+        "height": 1,
+        "name": "",
+        "label": "",
+        "format": "{{msg.topic}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 930,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "faba4eb3679e2236",
+        "type": "ui_text",
+        "z": "c50fc77c9612fbcd",
+        "group": "c84ad742857b146c",
+        "order": 2,
+        "width": 2,
+        "height": 1,
+        "name": "",
+        "label": "",
+        "format": "{{msg.payload}}",
+        "layout": "row-spread",
+        "className": "",
+        "style": false,
+        "font": "",
+        "fontSize": 16,
+        "color": "#000000",
+        "x": 1050,
+        "y": 520,
+        "wires": []
+    },
+    {
+        "id": "c601de5144d133ad",
+        "type": "function",
+        "z": "c50fc77c9612fbcd",
+        "name": "Signale",
+        "func": "function getRandomInt(min, max) {\n    return Math.floor(Math.random() * (max - min) + min);\n}\n\nlet payload = msg.payload;\nlet topic;\nlet Tsen;\nlet Tsta;\n\nlet MyNode = \"esp/M5-TH-0\" + payload \nlet TopSig = MyNode + \"/signal\";\nlet TopSen = MyNode + \"/sensors\";\nlet TopSta = MyNode + \"/status\";\n\nlet Sig = getRandomInt(-40, -80);\nlet Sen = getRandomInt(1, 3);\nif (Sen == 1) { Tsen = \"DHT\";}\nif (Sen == 2) { Tsen = \"Max\";}\nif (Sen == 3) { Tsen = \"DS18\";}\nlet Sta = getRandomInt(1, 4);\nif (Sen == 1) { Tsta = \"OK\";}\nif (Sen == 2) { Tsta = \"Command received\";}\nif (Sen == 3) { Tsta = \"Restart\";}\nif (Sen == 3) { Tsta = \"Reconnected\";}\n\nmsg = { payload: Sig, topic: TopSig};\nlet msg1 = { payload: Tsen, topic: TopSen };\nlet msg2 = { payload: Tsta, topic: TopSta };\n\nnode.send(msg);\nnode.send(msg1);\nnode.send(msg2);\n",
+        "outputs": 1,
+        "timeout": 0,
+        "noerr": 0,
+        "initialize": "",
+        "finalize": "",
+        "libs": [],
+        "x": 640,
+        "y": 380,
+        "wires": [
+            [
+                "74fb07d4a7445eb6",
+                "faba4eb3679e2236",
+                "33f62afdd1f8e7e5"
+            ]
+        ]
+    },
+    {
+        "id": "77912aac71cfb757",
+        "type": "random",
+        "z": "c50fc77c9612fbcd",
+        "name": "50-59",
+        "low": "50",
+        "high": "59",
+        "inte": "true",
+        "property": "payload",
+        "x": 490,
+        "y": 380,
+        "wires": [
+            [
+                "c601de5144d133ad"
+            ]
+        ]
+    },
+    {
+        "id": "def7eeecd404a57d",
+        "type": "inject",
+        "z": "c50fc77c9612fbcd",
+        "name": "",
+        "props": [
+            {
+                "p": "payload"
+            },
+            {
+                "p": "topic",
+                "vt": "str"
+            }
+        ],
+        "repeat": "3",
+        "crontab": "",
+        "once": false,
+        "onceDelay": 0.1,
+        "topic": "",
+        "payload": "",
+        "payloadType": "date",
+        "x": 150,
+        "y": 400,
+        "wires": [
+            [
+                "77912aac71cfb757"
+            ]
+        ]
+    },
+    {
+        "id": "17bc34fa9dd5fa1b",
+        "type": "comment",
+        "z": "c50fc77c9612fbcd",
+        "name": "Mosquitto to be changed",
+        "info": "The IP must be adapted to the mosquitto \nserver that is the connection to the \nsimulated devices",
+        "x": 1070,
+        "y": 240,
+        "wires": []
+    }
+]
